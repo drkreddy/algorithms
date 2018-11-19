@@ -2,10 +2,7 @@ import com.sun.deploy.util.ArrayUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Arrays {
 
@@ -348,6 +345,71 @@ public class Arrays {
             x=x^input[i];
         }
         System.out.println(x);
+    }
+
+    @Test
+    public void SortingElementsByFrequency(){
+        int[] input = {2, 3, 2, 4, 5, 12, 2, 3, 3, 3, 12};
+
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<input.length;i++){
+            Integer val = map.get(input[i]);
+            if(val!=null){
+                map.put(input[i],val+1);
+            }else{
+                map.put(input[i],val);
+            }
+        }
+
+
+    }
+
+    @Test
+    public void LargestSubarrayOf0sand1s(){
+
+        int [] input = {1, 0, 0, 0, 0,1,0,1};
+
+        int sum=0;
+        int n=input.length;
+        for(int i=0;i<input.length;i++){
+            sum+=input[i];
+        }
+
+        if(n%2==1){
+            System.out.println(max(subarray(input,0,n-2,sum-input[n-1]),2,subarray(input,1,n-1,sum-input[0])));
+        }else{
+            System.out.println(subarray(input,0,n-1,sum));
+        }
+
+
+    }
+
+    public int subarray(int[] input,int start,int end,int sum){
+        if(sum==(end-start+1)/2){
+            return end-start+1;
+        }
+        if(end-start<=2){
+            return 2;
+        }
+
+        return max(subarray(input,start,end-2,sum-input[end]-input[end-1]),
+                (subarray(input, start+2, end , sum - input[start] - input[start + 1])),
+                subarray(input,start+1,end-1,sum-input[start]-input[end]));
+    }
+    public int max(int a,int b,int c) {
+        return a > b ? c > a ? c : a : c > b ? c : b;
+    }
+
+
+
+    void print(int[] input,int s ,int e){
+        for(int i=s;i<=e;i++){
+            System.out.print(input[i]+" ");
+        }
+    }
+    private void maxArray(int i,int k){
+
+
     }
 
     @Test
