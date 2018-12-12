@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CommonSubString {
+public class CommonSubStringUsingMemory {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String nStr = sc.nextLine();
@@ -21,13 +21,6 @@ public class CommonSubString {
             findCommonSubStr(in[0], in[1]);
         }
     }
-
-    /* abcd acde
-     * d!=e > abcd,acd                       &                                   abc,acde
-     *        d==d> 1+ abc,ac                             c!=e 0 + abc,acd                     & ab acde
-     *        c==c 1+1+ab a                            c!=d ab acd  & abc ac                  b!=e a,acde ab,acd
-     *        a!=b 0,   a,a  *ab "
-     */
 
 
     public static int findCommonSubStr(String one, String two) {
