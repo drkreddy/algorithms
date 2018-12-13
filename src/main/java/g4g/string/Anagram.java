@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.util.Arrays.*;
+
 public class Anagram {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -21,8 +23,10 @@ public class Anagram {
         }
     }
     public static String anagram(String input1, String input2){
-        char[] array = input1.toCharArray();
-        char[] array2 = input2.toCharArray();
+        char[] array = (input1.toCharArray()) ;
+        char[] array2 = (input2.toCharArray());
+        sort(array);
+        sort(array2);
         if(array.length != array.length){
             return "NO";
         }
