@@ -3,6 +3,8 @@ package g4g.lnkdList;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Optional;
+
 
 public class reverseInGroup {
     static class Node {
@@ -11,6 +13,11 @@ public class reverseInGroup {
         Node(int value,Node next) {
             this.value = value;
             this.next=next;
+        }
+
+        @Override
+        public String toString() {
+            return "{ value="+value+", next"+ ((next==null)?null:next.value)+"}";
         }
     }
     public static void main(String[] args) throws Exception {
@@ -46,27 +53,33 @@ public class reverseInGroup {
         Node prev =null;
         int count =1;
         Node c=n;
-        Node parent=null;
         Node first=null;
+        Node last=n;
         while(c!=null){
-            if((count)%(k+1)==0){
+            if(count==20){
+                break;
+            }
+            if(count>1 && (count)%(k)==1){
                 if(first==null){
                     first=prev;
+                    prev=null;
+                    last=c;
+                }else{
+                    h.next=prev;
+                    prev=null;
+                    h=last;
+                    last=c;
+
                 }
-                h.next=c;
-                h=c;
-                prev=c;
-                c=c.next;
-                count++;
-                continue;
             }
+
             Node next = c.next;
             c.next=prev;
             prev = c;
             c=next;
-
             count++;
         }
+        h.next=prev;
 
     return first;
     }
@@ -74,5 +87,5 @@ public class reverseInGroup {
 }
 // a b c d e f g h
 //1 2 3 4 5 6
-//1<2<-3 4
-//h    pr  c
+//1<2<-3   4<-5<-6 7->8
+//h    pr
