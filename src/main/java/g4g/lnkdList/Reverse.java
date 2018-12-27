@@ -32,6 +32,7 @@ public class Reverse {
         }
     }
 
+
     static void print(Node n) {
         Node c=n;
         while(c!=null){
