@@ -95,5 +95,11 @@ public class Sort012LnkdLst {
 
         // head->2->1->0->2->1->2->0->1->0->null
         //
+
+
     }
 }
+
+/*
+* Other method is count number of zeros ones and two and set the values of nodes  accordingly in Linked list
+ */
