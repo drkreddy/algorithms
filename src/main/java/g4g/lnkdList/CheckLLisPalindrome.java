@@ -48,7 +48,4 @@ public class CheckLLisPalindrome {
 
         return result;
     }
-
-
-    // 1 2 3 4 3 2 1
 }
