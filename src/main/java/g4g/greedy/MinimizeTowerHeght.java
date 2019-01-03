@@ -20,27 +20,30 @@ public class MinimizeTowerHeght {
     }
 
     private static int minimize(int[] ar, int k) {
-
-        int [] upper = new int[ar.length];
-        int [] lower = new int[ar.length];
-        int [] upperMindist = new int[ar.length];
-        int [] lowerMindist = new int[ar.length];
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        double avg=0;
+        int current=0;
+        for(int i=0;i<ar.length;i++){
+            avg+=ar[i];
+        }
+        avg=avg/ar.length;
 
         for(int i=0;i<ar.length;i++){
-            upper[i]=ar[i]+k;
-            if(ar[i]>k){
-                lower[i]=ar[i]-k;
-            }else {
-                lower[i]=upper[i];
-            }
+           if(avg>ar[i]){
+               current=ar[i]+k;
+           }else{
+               current=ar[i]-k;
+           }
+           if(min>current){
+               min=current;
+           }
+           if(max<current){
+               max=current;
+           }
         }
-        upperMindist[0]=0;
-        lowerMindist[0]=0;
-        for(int i=1;i<ar.length;i++){
-            upperMindist[i]=Math.min(mod(upper[i]-upper[i-1])+upperMindist[i-1],mod(upper[i]-lower[i-1])+lowerMindist[i-1]);
-            lowerMindist[i]=Math.min(mod(lower[i]-upper[i-1])+upperMindist[i-1],mod(lower[i]-lower[i-1])+lowerMindist[i-1]);
-        }
-        return Math.min(upperMindist[ar.length-1],lowerMindist[ar.length-1]);
+
+       return mod(max-min);
     }
     private static int mod(int a){
         return a<0?-1*a:a;
