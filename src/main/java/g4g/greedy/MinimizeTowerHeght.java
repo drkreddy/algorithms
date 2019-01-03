@@ -20,30 +20,35 @@ public class MinimizeTowerHeght {
     }
 
     private static int minimize(int[] ar, int k) {
-        int min=Integer.MAX_VALUE;
-        int max=Integer.MIN_VALUE;
-        double avg=0;
-        int current=0;
-        for(int i=0;i<ar.length;i++){
-            avg+=ar[i];
+        Arrays.sort(ar);
+        int dif=mod(ar[ar.length-1]-ar[0]);
+        int min,max;
+        if(ar[0]+k>ar[ar.length-1]-k){
+            max=ar[0]+k;
+            min=ar[ar.length-1]-k;
+        }else{
+            max=ar[ar.length]-k;
+            min=ar[0]+k;
         }
-        avg=avg/ar.length;
+        for(int i=1;i<ar.length-1;i++){
+            int add=ar[i]+k;
+            int sub=ar[i]-k;
 
-        for(int i=0;i<ar.length;i++){
-           if(avg>ar[i]){
-               current=ar[i]+k;
-           }else{
-               current=ar[i]-k;
-           }
-           if(min>current){
-               min=current;
-           }
-           if(max<current){
-               max=current;
-           }
+            if(sub>=min || add <=max){
+                continue;
+            }
+
+            if(add-min < max-sub){
+                max=add;
+            }else {
+                min=sub;
+            }
+
         }
 
-       return mod(max-min);
+
+
+       return Math.min(dif,max-min);
     }
     private static int mod(int a){
         return a<0?-1*a:a;
