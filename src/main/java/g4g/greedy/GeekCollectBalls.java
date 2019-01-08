@@ -14,7 +14,7 @@ public class GeekCollectBalls {
             for(int j=0;j<n;j++){
                 N[j]=sc.nextInt();
             }
-            for(int j=0;j<n;j++){
+            for(int j=0;j<m;j++){
                 M[j]=sc.nextInt();
             }
 
@@ -22,51 +22,43 @@ public class GeekCollectBalls {
             int s=0;
             int one=0;
             int two=0;
+            int prev=0;
 
             while(r<n && s<m){
-                if(N[r]==M[s]){
-                    int max=Math.max(one,two);
-                    max+=N[r];
-                    one=two=max;
-                    if(r==n-1){
-                        one=two=max+N[r];
-                        r++;
-                        break;
-                    }
-                    if(s==n-1){
-                        one=two=max+N[r];
-                        s++;
-                        break;
-                    }
-                    if((r+1)<n && N[r]==N[r+1]){
-                        r++;
-                    }else if((s+1)<m && M[s]==M[s+1]){
-                        s++;
-                    }else {
-                        r++;
-                        s++;
-                    }
-                    continue;
-                }
 
                 if(N[r]<M[s]){
                     one+=N[r];
                     r++;
-                }else{
+                }else if(N[r]> M[s]){
                     two+=M[s];
                     s++;
+                }else{
+
+                    int max=one<two?two:one;
+
+                    one=max+N[r];
+                    two=max+M[s];
+
+                    if(r+1<n && N[r+1]==N[r]){
+                        r++;
+                    }else if(s+1<m && M[s+1]==M[s]){
+                        s++;
+                    }else{
+                        r++;
+                        s++;
+                    }
                 }
             }
 
-            if(r==n){
+            if(r<n){
+                for(int k=r;k<n;k++){
+                    one+=N[r];
+                }
+            }
+
+            if(s<m){
                 for(int k=s;k<m;k++){
                     two+=M[s];
-                }
-            }
-
-            if(s==m){
-                for(int k=r;k<n;k++){
-                    one+=M[r];
                 }
             }
 
@@ -75,3 +67,11 @@ public class GeekCollectBalls {
         }
     }
 }
+
+
+
+/*
+    1 4 5 8 8 8
+    2 8 9 9 9
+
+*/
