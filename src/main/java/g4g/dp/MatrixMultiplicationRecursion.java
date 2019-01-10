@@ -2,7 +2,7 @@ package g4g.dp;
 
 import java.util.Scanner;
 
-public class MatrixMultiplication {
+public class MatrixMultiplicationRecursion {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
