@@ -1,5 +1,7 @@
 package g4g.dp;
 
+import org.omg.CORBA.INTERNAL;
+
 import java.util.Scanner;
 
 public class MinJumps {
@@ -21,21 +23,20 @@ public class MinJumps {
     private static int miJumps(int[] a) {
      int[] jumps=new int[a.length];
      jumps[0]=0;
-
-     for(int i=0;i<a.length;i++){
-         for(int j=i+1;j<=i+a[i];j++){
-             if(j==a.length){
-                 break;
-             }
-             if(jumps[j]==0){
-                 jumps[j]=jumps[i]+1;
-             }else{
-                 jumps[j]=Math.min(jumps[i]+1,jumps[j]);
+     for(int i=1;i<a.length;i++){
+         int min= 20000000;
+         for(int j=0;j<i;j++){
+             if(i-j<=a[j]){
+                 if(j>0 && jumps[j]==0)
+                     continue;
+                 int dist=jumps[j]+1;
+                 min=dist<min?dist:min;
              }
          }
-     }
 
-    return jumps[a.length-1]>0?jumps[a.length-1]:-1;
+         jumps[i]=min==20000000?0:min;
+     }
+     return jumps[a.length-1]==0?-1:jumps[a.length-1];
     }
 
 }
