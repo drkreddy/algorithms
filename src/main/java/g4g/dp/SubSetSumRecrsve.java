@@ -47,5 +47,9 @@ public class SubSetSumRecrsve {
     }
 
 
+    /*
+    here we are passing n-1 in both because we dont have infinite supply of coins.
+     */
+
 }
 
