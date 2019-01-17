@@ -1,18 +1,14 @@
 package g4g.dp;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-public class CoinChange {
+public class CoinChangeDP {
     public static void main(String[] args) {
         Scanner sc =new Scanner(System.in);
         int t = sc.nextInt();
         for(int in=0;in<t;in++){
             int n = sc.nextInt();
             int coins[]=new int[n];
-            //not used
-            answerMap=new HashMap<>();
             for(int index=0;index<n;index++){
                 coins[index]=sc.nextInt();
             }
@@ -21,21 +17,19 @@ public class CoinChange {
         }
     }
 
-    //not used
-    static Map<Integer,Integer> answerMap;
-    private static int NoOfways(int[] coins,int n, int target) {
+    private static int NoOfways(int[] coins, int length, int target) {
 
-        if(target==0){
-            return 1;
-        }
-        if(target<0){
-            return 0;
-        }
+        int[] result=new int[target+1];
+        result[0]=1;
 
-        if(n<=0 && target>=1){
-            return 0;
+        for(int i=0;i<length;i++){
+            for(int j=coins[i];j<=target;j++){
+                result[j]=result[j]+result[j-coins[i]];
+            }
         }
 
-        return NoOfways(coins,n-1,target)+NoOfways(coins,n,target-coins[n-1]);
+        return result[target];
+
     }
 }
+
